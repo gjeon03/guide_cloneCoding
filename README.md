@@ -1,8 +1,8 @@
 # Guía de Cirugía Cardíaca Clone Coding
 
-작업 진행
+## 작업 진행
 
-## Main
+### Main
 
 [] Header
 
@@ -10,7 +10,7 @@
 
 [] Body
 
-## Header animation
+### Header animation
 
 [] Logo
 
@@ -20,7 +20,7 @@
 
 [] Help
 
-## Body animation
+### Body animation
 
 [] What is this
 
@@ -30,6 +30,6 @@
 
 [] Thank You
 
-## 추가적으로
+### 추가적으로
 
 [] Sound
