@@ -11,10 +11,13 @@ import styled, { keyframes } from "styled-components";
 const Area = styled.header`
   width: 100%;
   position: fixed;
-  top: 30px;
   left: 0;
-  ${(props) => (props.$history ? `padding: 0px 50px;` : `padding: 0px 20px;`)}
-
+  ${(props) =>
+    props.$history
+      ? `top: 30px;
+    padding: 0px 50px;`
+      : `top: 20px;
+    padding: 0px 20px;`}
   display: grid;
   align-items: center;
   grid-template-columns: 1fr auto auto auto;
@@ -177,13 +180,22 @@ const SearchBar = styled.div`
 `;
 
 const SearchBox = styled.div`
-  width: 320px;
   height: 60px;
   background-color: #edece7;
   border: 1px solid black;
   border-radius: 30px;
   overflow: hidden;
-  ${(props) => (!props.$search ? `display: none;` : "display: inline")}
+  z-index: 2;
+  ${(props) => {
+    if (props.$search) {
+      return `width: 320px; position: static; display: inline;`;
+    } else {
+      if (props.$searchHover) {
+        return `width: 255px; position: absolute; display: inline; right: 0;`;
+      }
+      return `position: absolute; display: none; right: 0;`;
+    }
+  }}
 `;
 
 const SearchInput = styled.input`
@@ -199,11 +211,12 @@ const SearchInput = styled.input`
   }
 `;
 
-const SearchBtn = styled(motion.div)`
+const SearchBtn = styled.div`
   width: 60px;
   height: 60px;
   position: absolute;
   right: 0;
+  z-index: 3;
   cursor: pointer;
 `;
 
@@ -264,6 +277,7 @@ export default function Header() {
   const [logo, setLogo] = useState(null);
   const [history, setHistory] = useState(null);
   const [search, setSearch] = useState(null);
+  const [searchHover, setSearchHover] = useState(false);
   const historySet = () => {
     const windowWidth = window.innerWidth;
     if (windowWidth <= 1140) {
@@ -289,7 +303,9 @@ export default function Header() {
     historySet();
     window.addEventListener("resize", handleResize);
   }, []);
-  //https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/search_icon_dark.svg
+  const handleSearchHover = (flag) => {
+    setSearchHover(flag);
+  };
   return (
     <Area $history={history}>
       <Link href="/">
@@ -318,10 +334,18 @@ export default function Header() {
         </History>
       </Link>
       <SearchBar $logo={logo}>
-        <SearchBox $search={search}>
+        <SearchBox
+          onMouseOver={() => handleSearchHover(true)}
+          onMouseOut={() => handleSearchHover(false)}
+          $search={search}
+          $searchHover={searchHover}
+        >
           <SearchInput type="text" placeholder="Buscar tarjeta..." />
         </SearchBox>
-        <SearchBtn>
+        <SearchBtn
+          onMouseOver={() => handleSearchHover(true)}
+          onMouseOut={() => handleSearchHover(false)}
+        >
           <SearchBtnBg $search={search} />
           <SearchBtnIcon $search={search} />
         </SearchBtn>
