@@ -13,7 +13,8 @@ const Area = styled.header`
   position: fixed;
   top: 30px;
   left: 0;
-  padding: 0px 50px;
+  ${(props) => (props.$history ? `padding: 0px 50px;` : `padding: 0px 20px;`)}
+
   display: grid;
   align-items: center;
   grid-template-columns: 1fr auto auto auto;
@@ -21,8 +22,6 @@ const Area = styled.header`
 
 const Logo = styled.a`
   display: flex;
-  font-size: 30px;
-  line-height: 1;
   align-items: center;
   font-weight: bold;
   font-family: "Poppins", sans-serif;
@@ -30,8 +29,13 @@ const Logo = styled.a`
 `;
 
 const Circle = styled.div`
-  width: 120px;
-  height: 120px;
+  ${(props) =>
+    props.$logo
+      ? `width: 120px;
+  height: 120px;`
+      : `width: 80px;
+  height: 80px;`}
+
   border-radius: 50%;
   background-color: #ffffff;
   position: relative;
@@ -46,7 +50,6 @@ const Absolute = styled(motion.div)`
 `;
 
 const CircleText = styled(Absolute)`
-  /* transform: rotate(-0.00110069deg); */
   background-image: url("https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/logo_text.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -59,6 +62,8 @@ const CircleArrow = styled(Absolute)`
 `;
 
 const HeaderName = styled.div`
+  ${(props) => (props.$logo ? `font-size: 30px;` : `font-size: 22px;`)}
+  line-height: 1;
   margin-left: 28px;
 `;
 
@@ -97,9 +102,9 @@ const headset2 = keyframes`
 const History = styled.a`
   width: auto;
   height: 60px;
+  min-width: 60px;
   position: relative;
-  display: flex;
-  align-items: center;
+  display: grid;
   margin-right: 20px;
   cursor: pointer;
   span {
@@ -157,23 +162,33 @@ const HeadsetIcon3 = styled(Icon)`
 `;
 
 const SearchBar = styled.div`
+  width: auto;
+  min-width: 60px;
+  height: 60px;
+  display: grid;
+  position: relative;
+  margin-right: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  ${(props) => (props.$logo ? `display: grid;` : `display: none;`)}
+  &:hover :last-child :first-child {
+    transform: scale(0.85);
+  }
+`;
+
+const SearchBox = styled.div`
   width: 320px;
   height: 60px;
   background-color: #edece7;
   border: 1px solid black;
   border-radius: 30px;
   overflow: hidden;
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  margin-right: 20px;
-  &:hover :last-child :first-child {
-    transform: scale(0.85);
-  }
+  ${(props) => (!props.$search ? `display: none;` : "display: inline")}
 `;
 
 const SearchInput = styled.input`
   width: 205px;
+  height: 100%;
   border: none;
   background-color: #edece7;
   font-size: 20px;
@@ -184,21 +199,36 @@ const SearchInput = styled.input`
   }
 `;
 
-const SearchBtn = styled.div`
+const SearchBtn = styled(motion.div)`
   width: 60px;
   height: 60px;
-  position: relative;
+  position: absolute;
+  right: 0;
   cursor: pointer;
 `;
 
-const SearchBtnBg = styled(Absolute)`
+const SearchBtnBg = styled.div`
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   border-radius: 50%;
-  background-color: black;
+  border: 1px solid black;
   transition: transform 0.2s ease-in;
+  ${(props) => (props.$search ? `background-color: black;` : ``)}
 `;
 
-const SearchBtnIcon = styled(Absolute)`
-  background-image: url("https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/search_icon.svg");
+const SearchBtnIcon = styled.div`
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  ${(props) =>
+    props.$search
+      ? `background-image: url("https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/search_icon.svg");`
+      : `background-image: url("https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/search_icon_dark.svg");`}
+
   background-position: center;
   background-repeat: no-repeat;
   background-size: 63px;
@@ -231,6 +261,7 @@ const WhiteArea = styled.div`
 export default function Header() {
   const { scrollYProgress } = useViewportScroll();
   const rotate = useTransform(scrollYProgress, [1, -1], [-50, 50]);
+  const [logo, setLogo] = useState(null);
   const [history, setHistory] = useState(null);
   const [search, setSearch] = useState(null);
   const historySet = () => {
@@ -245,6 +276,11 @@ export default function Header() {
     } else {
       setSearch(true);
     }
+    if (windowWidth <= 600) {
+      setLogo(false);
+    } else {
+      setLogo(true);
+    }
   };
   const handleResize = () => {
     historySet();
@@ -255,14 +291,14 @@ export default function Header() {
   }, []);
   //https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/search_icon_dark.svg
   return (
-    <Area>
+    <Area $history={history}>
       <Link href="/">
         <Logo>
-          <Circle>
+          <Circle $logo={logo}>
             <CircleText style={{ rotate }} />
             <CircleArrow />
           </Circle>
-          <HeaderName>
+          <HeaderName $logo={logo}>
             Guía
             <br />
             de Cirugía
@@ -281,11 +317,13 @@ export default function Header() {
           <HeadsetIcon3 />
         </History>
       </Link>
-      <SearchBar>
-        <SearchInput type="text" placeholder="Buscar tarjeta..." />
+      <SearchBar $logo={logo}>
+        <SearchBox $search={search}>
+          <SearchInput type="text" placeholder="Buscar tarjeta..." />
+        </SearchBox>
         <SearchBtn>
-          <SearchBtnBg />
-          <SearchBtnIcon />
+          <SearchBtnBg $search={search} />
+          <SearchBtnIcon $search={search} />
         </SearchBtn>
       </SearchBar>
       <MenuBtn>
