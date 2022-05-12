@@ -4,21 +4,23 @@
 
 ### Main
 
-[] Header
+[O] Header
 
 [] Footer
 
 [] Body
 
+[] sideMenu
+
 ### Header animation
 
-[] Logo
+[O] Logo
 
-[] Sound History
+[O] Sound History
 
-[] Search
+[O] Search
 
-[] Help
+[O] Menu
 
 ### Body animation
 
