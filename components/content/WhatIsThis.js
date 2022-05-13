@@ -1,4 +1,6 @@
+import { useViewportScroll } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import styled from "styled-components";
 import Card from "../common/Card";
@@ -6,7 +8,8 @@ import { bounce } from "../common/styles/bounce";
 
 const Area = styled.section`
   width: 100%;
-  height: auto;
+  height: 1400px;
+  background-color: pink;
   margin-top: 255px;
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -22,13 +25,17 @@ const Title = styled.span`
 `;
 
 const DescriptionArea = styled.div`
-  height: auto;
+  background-color: yellow;
+  position: relative;
 `;
 
 const DescriptionBox = styled.div`
+  width: 320px;
   display: flex;
   flex-direction: column;
   padding-left: 50px;
+  position: fixed;
+  ${(props) => `transform: translate3d(0, ${props.$scroll}px, 0)`}
 `;
 
 const DescriptionText = styled.span`
@@ -57,10 +64,35 @@ const DescriptionLink = styled.a`
 const CardArea = styled.div``;
 
 export default function WhatIsThis() {
+  const [scrollPos, setScrollPos] = useState(0);
+  const desRef = useRef(null);
+  // const { scrollY } = useViewportScroll();
+  const handleScrollPos = () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 950) {
+      setScrollPos((scrollY - 950) * -1);
+    } else if (scrollY > 0) {
+      setScrollPos(0);
+    }
+    console.log(scrollY);
+  };
+  useEffect(() => {
+    // scrollY.onChange(() => {
+    //   const value = scrollY.get();
+    //   if (value > 950) {
+    //     desRef.current.style.position = "static";
+    //     console.log(scrollY.get());
+    //     console.log(desRef.current);
+    //   } else {
+    //     desRef.current.style.position = "fixed";
+    //   }
+    // });
+    window.addEventListener("scroll", handleScrollPos);
+  }, []);
   return (
     <Area>
       <DescriptionArea>
-        <DescriptionBox>
+        <DescriptionBox ref={desRef} $scroll={scrollPos}>
           <Title>¿QUÉ ES ESTO?</Title>
           <DescriptionText>
             Si estás leyendo esto, es porque pronto te operarán —a ti o a

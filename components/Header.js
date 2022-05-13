@@ -259,8 +259,8 @@ const WhiteArea = styled.div`
 `;
 
 export default function Header() {
-  const { scrollYProgress } = useViewportScroll();
-  const rotate = useTransform(scrollYProgress, [1, -1], [-50, 50]);
+  const { scrollY, scrollYProgress } = useViewportScroll();
+  const rotate = useTransform(scrollY, [5000, -5000], [-150, 150]);
   const [logo, setLogo] = useState(null);
   const [history, setHistory] = useState(null);
   const [search, setSearch] = useState(null);

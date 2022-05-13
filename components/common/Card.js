@@ -1,9 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import data from "../../cardInfo.json";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  useViewportScroll,
+} from "framer-motion";
 
 const Area = styled.div`
   position: relative;
+`;
+
+const CardAnimation = keyframes`
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.05);
+	}
+	100% {
+		transform: scale(1.01);
+	}
 `;
 
 const CardBox = styled.div`
@@ -12,16 +30,23 @@ const CardBox = styled.div`
   position: absolute;
   cursor: pointer;
   ${(props) => {
+    let str = `top: ${150 * props.$info.$idx}px;`;
     if (props.$info.$idx !== 6) {
-      return `top: ${150 * props.$info.$idx}px; left: ${
-        props.$info.$size * props.$info.$idx
-      }px; z-index: ${props.$info.$idx};`;
+      str += `left: ${props.$info.$size * props.$info.$idx}px;`;
     } else {
-      return `top: ${150 * props.$info.$idx}px; right: 0px; z-index: ${
-        props.$info.$idx
-      };`;
+      str += `right: 0px;`;
     }
+    if (props.$info.$hover === props.$info.$idx) {
+      str += `z-index: 10;`;
+    } else {
+      str += `z-index: ${props.$info.$idx};`;
+    }
+    return str;
   }}
+  &:hover :last-child {
+    animation: ${CardAnimation} 0.5s ease-in-out;
+    transform: scale(1.01);
+  }
 `;
 
 const Box = styled.div`
@@ -45,10 +70,11 @@ const CardContent = styled(Box)`
   top: 0;
   right: 0;
   z-index: 2;
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s;
+  background-color: ${(props) => (props.$hover ? "#edece7" : "white")};
 `;
 
 const CardName = styled.span`
@@ -76,12 +102,17 @@ const CardNum = styled.div`
 `;
 
 const CardPhrase = styled.span`
-  font-size: 16px;
-  font-weight: 300;
+  width: auto;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 10px;
   position: absolute;
-  left: 14px;
-  bottom: 44px;
+  left: 46px;
+  bottom: 20px;
   transform: rotate(-90deg);
+  transform-origin: left;
 `;
 
 const CardImage = styled.div`
@@ -99,12 +130,18 @@ export default function Card() {
   const firstCardRef = useRef(null);
   const lastCardRef = useRef(null);
   const [cardPos, setCardPos] = useState(null);
-  const [zIndexValue, setZIndexValue] = useState(Array(7).fill(true));
+  const [hoverIndex, setHoverIndex] = useState(null);
+  const { scrollYProgress } = useViewportScroll();
   const handleResize = () => {
     const firstPosX = firstCardRef.current.getBoundingClientRect().x;
     const lastPosX = lastCardRef.current.getBoundingClientRect().x;
-
     setCardPos((lastPosX - firstPosX) / 6);
+  };
+  const handleMouseOver = (index) => {
+    setHoverIndex(index);
+  };
+  const handleMouseOut = () => {
+    setHoverIndex(null);
   };
   useEffect(() => {
     handleResize();
@@ -114,18 +151,32 @@ export default function Card() {
     <Area>
       {data.result.map((v, i) => {
         let refValue = null;
+        let urlValue = "colorUrl";
+        let colorValue = v.color;
+        let hoverValue = false;
         if (i === 0) refValue = firstCardRef;
         else if (i === 6) refValue = lastCardRef;
+        if (hoverIndex !== null && hoverIndex !== i) {
+          urlValue = "blackUrl";
+          colorValue = "#edece7";
+          hoverValue = true;
+        }
         return (
-          <CardBox key={i} $info={{ $size: cardPos, $idx: i }} ref={refValue}>
-            <ColorBox $color={v.color} />
-            <CardContent>
+          <CardBox
+            key={i}
+            $info={{ $size: cardPos, $idx: i, $hover: hoverIndex }}
+            ref={refValue}
+            onMouseOver={() => handleMouseOver(i)}
+            onMouseOut={handleMouseOut}
+          >
+            <ColorBox $color={colorValue} />
+            <CardContent $hover={hoverValue}>
               <CardName>{v.name}</CardName>
-              <CardNum $color={v.color}>
+              <CardNum $color={colorValue}>
                 <span>{i + 1}</span>
               </CardNum>
               <CardPhrase>{v.phrase}</CardPhrase>
-              <CardImage $url={v.colorUrl} />
+              <CardImage $url={v[urlValue]} />
             </CardContent>
           </CardBox>
         );
