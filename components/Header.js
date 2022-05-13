@@ -7,11 +7,13 @@ import {
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { bounce } from "./common/styles/bounce";
 
 const Area = styled.header`
   width: 100%;
   position: fixed;
   left: 0;
+  z-index: 99;
   ${(props) =>
     props.$history
       ? `top: 30px;
@@ -68,21 +70,6 @@ const HeaderName = styled.div`
   ${(props) => (props.$logo ? `font-size: 30px;` : `font-size: 22px;`)}
   line-height: 1;
   margin-left: 28px;
-`;
-
-const bounce = keyframes`
-  0% {
-    transform: scale(1.05);
-  }
-  33% {
-    transform: scale(1);
-  }
-  66% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
 `;
 
 const headset1 = keyframes`
@@ -278,7 +265,7 @@ export default function Header() {
   const [history, setHistory] = useState(null);
   const [search, setSearch] = useState(null);
   const [searchHover, setSearchHover] = useState(false);
-  const historySet = () => {
+  const handleResize = () => {
     const windowWidth = window.innerWidth;
     if (windowWidth <= 1140) {
       setHistory(false);
@@ -296,11 +283,8 @@ export default function Header() {
       setLogo(true);
     }
   };
-  const handleResize = () => {
-    historySet();
-  };
   useEffect(() => {
-    historySet();
+    handleResize();
     window.addEventListener("resize", handleResize);
   }, []);
   const handleSearchHover = (flag) => {
