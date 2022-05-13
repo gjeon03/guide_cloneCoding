@@ -112,7 +112,7 @@ const History = styled.a`
   cursor: pointer;
   span {
     display: inline-block;
-    font-size: 23px;
+    font-size: 22px;
     margin-right: 20px;
     font-weight: 200;
     position: absolute;
@@ -203,7 +203,7 @@ const SearchInput = styled.input`
   height: 100%;
   border: none;
   background-color: #edece7;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 200;
   padding: 0 26px;
   :focus {

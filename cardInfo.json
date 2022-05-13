@@ -1,0 +1,46 @@
+{
+	"result": [
+		{
+			"name": "El corazón",
+			"phrase": "Conoce tu corazón",
+			"color": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_Corazon_Color.svg",
+			"black": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_Corazon_Off.svg"
+		},
+		{
+			"name": "Me van a operar",
+			"phrase": "Preparación",
+			"color": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_2_Color_Mesa-de-trabajo-1-copia-3.svg",
+			"black": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_2_Color_Mesa-de-trabajo-1-copia-2.svg"
+		},
+		{
+			"name": "Antes de la cirugía",
+			"phrase": "Preparación",
+			"color": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_3_On.svg",
+			"black": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_3_Off.svg"
+		},
+		{
+			"name": "Ingreso y preparación",
+			"phrase": "Preparación",
+			"color": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_4_On.svg",
+			"black": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_4_Off.svg"
+		},
+		{
+			"name": "Día de la cirugía y quirófano",
+			"phrase": "Cirugía",
+			"color": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_5_On.svg",
+			"black": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_5_Off.svg"
+		},
+		{
+			"name": "Después de la cirugía",
+			"phrase": "Recuperación",
+			"color": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_6_On.svg",
+			"black": "https://guiacirugiacardiaca.com/wp-content/uploads/2021/12/GRE_HOME_6_Off.svg"
+		},
+		{
+			"name": "Ya estoy en casa",
+			"phrase": "Recuperación",
+			"color": "https://guiacirugiacardiaca.com/wp-content/uploads/2022/05/GRE_HOME_7_On-1.svg",
+			"black": "https://guiacirugiacardiaca.com/wp-content/uploads/2022/05/GRE_HOME_7_Off-01.svg"
+		}
+	]
+}
