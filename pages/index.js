@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import WhatIsThis from "../components/content/WhatIsThis";
 import FullContent from "../components/content/FullContent";
 import HistorySound from "../components/content/HistorySound";
+import Introduce from "../components/content/Introduce";
 
 const Area = styled.div``;
 
@@ -21,6 +22,7 @@ export default function Home() {
       <WhatIsThis></WhatIsThis>
       <FullContent></FullContent>
       <HistorySound></HistorySound>
+      <Introduce></Introduce>
     </Area>
   );
 }

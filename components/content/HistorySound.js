@@ -6,7 +6,6 @@ import { bounce } from "../common/styles/bounce";
 
 const Area = styled.section`
   width: 100%;
-  min-height: 650px;
   margin-top: 250px;
   padding-bottom: 130px;
   display: grid;

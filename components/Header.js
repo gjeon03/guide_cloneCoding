@@ -20,9 +20,15 @@ const Area = styled.header`
     padding: 0px 50px;`
       : `top: 20px;
     padding: 0px 20px;`}
-  display: grid;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  grid-template-columns: 1fr auto auto auto;
+`;
+
+const LeftHeader = styled.div``;
+
+const RightHeader = styled.div`
+  display: flex;
 `;
 
 const Logo = styled.a`
@@ -293,51 +299,55 @@ export default function Header() {
   };
   return (
     <Area $history={history}>
-      <Link href="/">
-        <Logo>
-          <Circle $logo={logo}>
-            <CircleText style={{ rotate }} />
-            <CircleArrow />
-          </Circle>
-          <HeaderName $logo={logo}>
-            Guía
-            <br />
-            de Cirugía
-            <br />
-            Cardíaca
-          </HeaderName>
-        </Logo>
-      </Link>
-      <Link href="#">
-        <History>
-          <HistoryBox $history={history}>
-            <span>Historia Sonora</span>
-          </HistoryBox>
-          <HeadsetIcon1 $history={history} />
-          <HeadsetIcon2 />
-          <HeadsetIcon3 />
-        </History>
-      </Link>
-      <SearchBar $logo={logo}>
-        <SearchBox
-          onMouseOver={() => handleSearchHover(true)}
-          onMouseOut={() => handleSearchHover(false)}
-          $search={search}
-          $searchHover={searchHover}
-        >
-          <SearchInput type="text" placeholder="Buscar tarjeta..." />
-        </SearchBox>
-        <SearchBtn
-          onMouseOver={() => handleSearchHover(true)}
-          onMouseOut={() => handleSearchHover(false)}
-        >
-          <SearchBtnBg $search={search} />
-          <SearchBtnIcon $search={search} />
-        </SearchBtn>
-      </SearchBar>
-      <MenuBtn>
-        <WhiteArea />
-      </MenuBtn>
+      <LeftHeader>
+        <Link href="/">
+          <Logo>
+            <Circle $logo={logo}>
+              <CircleText style={{ rotate }} />
+              <CircleArrow />
+            </Circle>
+            <HeaderName $logo={logo}>
+              Guía
+              <br />
+              de Cirugía
+              <br />
+              Cardíaca
+            </HeaderName>
+          </Logo>
+        </Link>
+      </LeftHeader>
+      <RightHeader>
+        <Link href="#">
+          <History>
+            <HistoryBox $history={history}>
+              <span>Historia Sonora</span>
+            </HistoryBox>
+            <HeadsetIcon1 $history={history} />
+            <HeadsetIcon2 />
+            <HeadsetIcon3 />
+          </History>
+        </Link>
+        <SearchBar $logo={logo}>
+          <SearchBox
+            onMouseOver={() => handleSearchHover(true)}
+            onMouseOut={() => handleSearchHover(false)}
+            $search={search}
+            $searchHover={searchHover}
+          >
+            <SearchInput type="text" placeholder="Buscar tarjeta..." />
+          </SearchBox>
+          <SearchBtn
+            onMouseOver={() => handleSearchHover(true)}
+            onMouseOut={() => handleSearchHover(false)}
+          >
+            <SearchBtnBg $search={search} />
+            <SearchBtnIcon $search={search} />
+          </SearchBtn>
+        </SearchBar>
+        <MenuBtn>
+          <WhiteArea />
+        </MenuBtn>
+      </RightHeader>
     </Area>
   );
 }

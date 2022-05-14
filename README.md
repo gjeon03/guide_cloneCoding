@@ -8,15 +8,17 @@
 
 [O] Footer
 
-[] Main
+[O] Main
 
 [] SideMenu
 
-[] Full Content Ckick
+[] Full Content Click
 
 [] Sound Click
 
-### Header animation
+[] Scroll Heart
+
+### Header
 
 [O] Logo
 
@@ -35,7 +37,7 @@
 
 - 마우스 오버 효과 적용
 
-### Main animation
+### Main
 
 [O] What is this
 
@@ -53,7 +55,7 @@
 - 마우스 오버 효과 적용
 - 버튼 클릭시 리스트 추가
 
-[] Thank You
+[O] Thank You
 
 ### 추가적으로
 

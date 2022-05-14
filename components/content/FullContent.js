@@ -4,8 +4,7 @@ import data from "../../contentInfo.json";
 
 const Area = styled.section`
   width: 100%;
-  min-height: 650px;
-  margin-top: 250px;
+  padding-top: 100px;
   display: grid;
   grid-template-columns: 200px 1fr;
 `;
@@ -39,7 +38,7 @@ const RightOnscreen = styled.div`
 
 const RightList = styled.span`
   cursor: pointer;
-  ${(props) => (props.$color ? "color: #969696;" : "color: black;")}
+  ${(props) => (props.$color ? "color: #c1c1c1;" : "color: black;")}
 `;
 
 export default function FullContent() {

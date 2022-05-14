@@ -8,8 +8,9 @@ import { bounce } from "../common/styles/bounce";
 
 const Area = styled.section`
   width: 100%;
-  height: 1400px;
-  margin-top: 255px;
+  height: 1700px;
+  padding-top: 255px;
+  margin-bottom: 100px;
   display: grid;
   grid-template-columns: 320px 1fr;
   grid-gap: 100px;
@@ -33,7 +34,6 @@ const DescriptionBox = styled.div`
   flex-direction: column;
   padding-left: 50px;
   position: fixed;
-  ${(props) => `transform: translate3d(0, ${props.$scroll}px, 0)`}
 `;
 
 const DescriptionText = styled.span`
@@ -78,7 +78,9 @@ export default function WhatIsThis() {
   return (
     <Area>
       <DescriptionArea>
-        <DescriptionBox $scroll={scrollPos}>
+        <DescriptionBox
+          style={{ transform: `translate3d(0, ${scrollPos}px, 0)` }}
+        >
           <Title>¿QUÉ ES ESTO?</Title>
           <DescriptionText>
             Si estás leyendo esto, es porque pronto te operarán —a ti o a
