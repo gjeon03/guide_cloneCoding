@@ -1,16 +1,20 @@
 # Guía de Cirugía Cardíaca Clone Coding
 
-## 작업 진행
+## 진행
 
 ### Main
 
 [O] Header
 
-[] Footer
+[O] Footer
 
 [] Main
 
-[] sideMenu
+[] SideMenu
+
+[] Full Content Ckick
+
+[] Sound Click
 
 ### Header animation
 
@@ -31,7 +35,7 @@
 
 - 마우스 오버 효과 적용
 
-### Body animation
+### Main animation
 
 [O] What is this
 
@@ -40,12 +44,18 @@
 - 창 크기 변경시 이미지 움직임
 - 이미지 마우스 오버 효과 적용
 
-[] Full Content
+[O] Full Content
 
-[] Sound History
+- 마우스 오버 효과 적용
+
+[O] Sound History
+
+- 마우스 오버 효과 적용
+- 버튼 클릭시 리스트 추가
 
 [] Thank You
 
 ### 추가적으로
 
 [] Sound
+[] Mouse Pointer

@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import data from "../../soundInfo.json";
 import { useState } from "react";
+import { bounce } from "../common/styles/bounce";
 
 const Area = styled.section`
   width: 100%;
@@ -25,13 +26,13 @@ const RightOnscreen = styled.div`
   width: 100%;
   height: 100%;
   padding-right: 50px;
-  background-color: pink;
   position: relative;
   top: -40px;
 `;
 
 const SoundList = styled.ul`
   list-style: none;
+  margin-bottom: 40px;
 `;
 
 const ItemBox = styled.div`
@@ -56,9 +57,11 @@ const SoundItem = styled.li`
     transform: translate(20px, 20px);
     visibility: visible;
   }
-  &:hover span:nth-child(1),
-  &:hover span:nth-child(2) {
+  &:hover span:nth-child(1) {
     transform: translate(50px, 20px);
+  }
+  &:hover span:nth-child(2) {
+    transform: translate(20px, 20px);
   }
   &:hover span:nth-child(3) {
     transform: translate(-20px, 20px);
@@ -91,9 +94,28 @@ const ItemBg = styled.div`
   transition: all 0.2s ease-in-out;
 `;
 
-const LoadMoreSound = styled.div``;
+const LoadMoreSound = styled.div`
+  width: 130px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 27.5px;
+  border: 1px solid black;
+  font-size: 20px;
+  font-weight: 300;
+  cursor: pointer;
+  &:hover {
+    animation: ${bounce} 1s infinite ease-in-out;
+  }
+`;
 
 export default function HistorySound() {
+  const [listCount, setListCount] = useState(5);
+  const handleOnClick = () => {
+    setListCount(listCount + 5);
+  };
   return (
     <Area>
       <LeftOnscreen>
@@ -105,23 +127,25 @@ export default function HistorySound() {
       </LeftOnscreen>
       <RightOnscreen>
         <SoundList>
-          <ItemBox>
-            <SoundItem>
-              <span>Episodio&nbsp;01</span>
-              <span>title</span>
-              <span>time</span>
-              <ItemBg />
-            </SoundItem>
-          </ItemBox>
-          <ItemBox>
-            <SoundItem>
-              <span>Episodio&nbsp;01</span>
-              <span>title</span>
-              <span>time</span>
-              <ItemBg />
-            </SoundItem>
-          </ItemBox>
+          {data.result.map(
+            (v, i) =>
+              i < listCount && (
+                <ItemBox key={i}>
+                  <SoundItem>
+                    <span>Episodio&nbsp;{String(i + 1).padStart(2, "0")}</span>
+                    <span>{v.name}</span>
+                    <span>{v.time}</span>
+                    <ItemBg />
+                  </SoundItem>
+                </ItemBox>
+              )
+          )}
         </SoundList>
+        {listCount < 15 && (
+          <LoadMoreSound onClick={handleOnClick}>
+            <span>Ver más</span>
+          </LoadMoreSound>
+        )}
       </RightOnscreen>
     </Area>
   );
