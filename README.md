@@ -1,63 +1,40 @@
-# Guía de Cirugía Cardíaca Clone Coding
+## 사용 언어
 
-## 진행
+- JavaScript
 
-### Main
+## Framework + Library
 
-[O] Header
+- Next.js
+- styled-components
+- framer motion
+- react bootstrap
 
-[O] Footer
+# 리스트업
 
-[O] Main
-
-[] SideMenu
-
-[] Full Content Click
-
-[] Sound Click
-
-[] Scroll Heart
-
-### Header
-
-[O] Logo
+## Header
 
 - 스크롤시 로고 회전
+- 버튼 마우스 오버 효과 적용
+- 창 줄어들었을 때 Search 버튼 마우스 오버 효과 적용
 
-[O] Sound History
+## Side Menu
 
-- 마우스 오버 효과 적용
+- 카드, 버튼, 리스트 마우스 오버 효과 적용
 
-[O] Search
+## Main
 
-- 마우스 오버 효과 적용
-- 창이 줄어들어 검색창이 사라졌을 때, 버튼에 마우스 오버시 검색창이 나타남.
+### 1.
 
-[O] Menu
+- 좌측 텍스트가 일정 구간까지 스크롤을 따라오게 구현
+- 브라우저 창 크기를 변경시 상단 카드들의 움직임 적용
+- 카드 마우스 오버 효과 적용
 
-- 마우스 오버 효과 적용
+### 2.
 
-### Main
+- 텍스트 마우스 오버 효과 적용
+- 텍스트 클릭시 하단에 카드 목록 구현
 
-[O] What is this
+### 3.
 
-- 스크롤시 좌측 Element 고정
-- 좌측 버튼 마우스 오버 효과 적용
-- 창 크기 변경시 이미지 움직임
-- 이미지 마우스 오버 효과 적용
-
-[O] Full Content
-
-- 마우스 오버 효과 적용
-
-[O] Sound History
-
-- 마우스 오버 효과 적용
-- 버튼 클릭시 리스트 추가
-
-[O] Thank You
-
-### 추가적으로
-
-[] Sound
-[] Mouse Pointer
+- 리스트, 버튼 마우스 오버 효과 적용
+- 버튼 클릭시 보여주는 리스트가 늘어나도록 구현
