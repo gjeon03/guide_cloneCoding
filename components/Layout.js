@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import Header from "./Header";
+import Header from "./Header/Header.js";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 

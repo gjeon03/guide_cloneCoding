@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Col, Row } from "react-bootstrap";
 import styled from "styled-components";
-import data from "../../logoUrlInfo.json";
+import LogoBox from "../common/LogoBox";
 
 const Area = styled.section`
   width: 100%;
@@ -61,21 +61,6 @@ const Title = styled.div`
   padding-bottom: 30px;
 `;
 
-const LogoBox = styled.div`
-  max-width: 330px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 45px;
-`;
-
-const Logo = styled.div`
-  width: 50px;
-  height: 50px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-`;
-
 const SocialFollow = styled.div`
   font-size: 20px;
   font-weight: 500;
@@ -110,15 +95,7 @@ export default function Introduce() {
           </ItemCol>
           <ItemCol sm={5}>
             <Title>HISTORIA SONORA</Title>
-            <LogoBox>
-              {data.result.map((v, i) => (
-                <Link href="#" key={i}>
-                  <a>
-                    <Logo style={{ backgroundImage: `url(${v})` }}></Logo>
-                  </a>
-                </Link>
-              ))}
-            </LogoBox>
+            <LogoBox />
             <Title>SÍGUENOS</Title>
             <SocialFollow>
               <Link href="#">

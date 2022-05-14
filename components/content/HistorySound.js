@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
-import data from "../../soundInfo.json";
+import data from "../../data/soundInfo.json";
 import { useState } from "react";
 import { bounce } from "../common/styles/bounce";
 
@@ -30,7 +30,6 @@ const RightOnscreen = styled.div`
 `;
 
 const SoundList = styled.ul`
-  list-style: none;
   margin-bottom: 40px;
 `;
 

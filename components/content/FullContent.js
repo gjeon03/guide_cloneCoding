@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import data from "../../contentInfo.json";
+import data from "../../data/contentInfo.json";
 
 const Area = styled.section`
   width: 100%;

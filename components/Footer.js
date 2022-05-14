@@ -6,7 +6,7 @@ const Area = styled.footer`
   position: fixed;
   left: 50px;
   bottom: 20px;
-  font-size: 10px;
+  font-size: 12px;
 `;
 
 export default function Footer() {

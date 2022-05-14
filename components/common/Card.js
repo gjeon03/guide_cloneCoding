@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import data from "../../cardInfo.json";
+import data from "../../data/cardInfo.json";
 import styled, { keyframes } from "styled-components";
-import {
-  motion,
-  useMotionValue,
-  useTransform,
-  useViewportScroll,
-} from "framer-motion";
+import { useViewportScroll } from "framer-motion";
 
 const Area = styled.div`
   position: relative;
@@ -131,7 +126,6 @@ export default function Card() {
   const lastCardRef = useRef(null);
   const [cardPos, setCardPos] = useState(null);
   const [hoverIndex, setHoverIndex] = useState(null);
-  const { scrollYProgress } = useViewportScroll();
   const handleResize = () => {
     const firstPosX = firstCardRef.current.getBoundingClientRect().x;
     const lastPosX = lastCardRef.current.getBoundingClientRect().x;
