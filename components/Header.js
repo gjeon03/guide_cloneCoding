@@ -241,6 +241,7 @@ const MenuBtn = styled.div`
   border-radius: 30px;
   position: relative;
   overflow: hidden;
+  background-color: #edece7;
   cursor: pointer;
   &:hover :last-child {
     transform: translateX(-10px);

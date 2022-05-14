@@ -33,7 +33,12 @@
 
 ### Body animation
 
-[] What is this
+[O] What is this
+
+- 스크롤시 좌측 Element 고정
+- 좌측 버튼 마우스 오버 효과 적용
+- 창 크기 변경시 이미지 움직임
+- 이미지 마우스 오버 효과 적용
 
 [] Full Content
 

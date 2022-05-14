@@ -9,7 +9,6 @@ import { bounce } from "../common/styles/bounce";
 const Area = styled.section`
   width: 100%;
   height: 1400px;
-  background-color: pink;
   margin-top: 255px;
   display: grid;
   grid-template-columns: 320px 1fr;
@@ -25,7 +24,6 @@ const Title = styled.span`
 `;
 
 const DescriptionArea = styled.div`
-  background-color: yellow;
   position: relative;
 `;
 
@@ -64,9 +62,7 @@ const DescriptionLink = styled.a`
 const CardArea = styled.div``;
 
 export default function WhatIsThis() {
-  const [scrollPos, setScrollPos] = useState(0);
-  const desRef = useRef(null);
-  // const { scrollY } = useViewportScroll();
+  const [scrollPos, setScrollPos] = useState(null);
   const handleScrollPos = () => {
     const scrollY = window.scrollY;
     if (scrollY > 950) {
@@ -74,25 +70,15 @@ export default function WhatIsThis() {
     } else if (scrollY > 0) {
       setScrollPos(0);
     }
-    console.log(scrollY);
   };
   useEffect(() => {
-    // scrollY.onChange(() => {
-    //   const value = scrollY.get();
-    //   if (value > 950) {
-    //     desRef.current.style.position = "static";
-    //     console.log(scrollY.get());
-    //     console.log(desRef.current);
-    //   } else {
-    //     desRef.current.style.position = "fixed";
-    //   }
-    // });
+    handleScrollPos();
     window.addEventListener("scroll", handleScrollPos);
   }, []);
   return (
     <Area>
       <DescriptionArea>
-        <DescriptionBox ref={desRef} $scroll={scrollPos}>
+        <DescriptionBox $scroll={scrollPos}>
           <Title>¿QUÉ ES ESTO?</Title>
           <DescriptionText>
             Si estás leyendo esto, es porque pronto te operarán —a ti o a
