@@ -33,13 +33,13 @@ export default function MenuIcon() {
     setMenuOnOff(true);
     document.body.style.overflow = "hidden";
   };
-  const handleMeneOff = () => {
+  const handleMenuOff = () => {
     setMenuOnOff(false);
     document.body.style.overflow = "auto";
   };
   return (
     <>
-      <SideMenu menuOnOff={menuOnOff} handleMeneOff={handleMeneOff} />
+      <SideMenu menuOnOff={menuOnOff} handleMenuOff={handleMenuOff} />
       <MenuBtn onClick={handleMeneOn}>
         <WhiteArea />
       </MenuBtn>

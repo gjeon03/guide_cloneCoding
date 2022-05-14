@@ -2,13 +2,11 @@
 	"ressult": [
 		{
 			"title": "Cómo funciona el corazón",
-			"color": "#B8E7DE",
-			"logoUrl": "https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/icn_doc.svg"
+			"color": "#B8E7DE"
 		},
 		{
 			"title": "Enfermedad cardiovascular y cirugía en las mujeres",
-			"color": "#EDECE7",
-			"logoUrl": "https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/icn_doc.svg"
+			"color": "#EDECE7"
 		}
 	]
 }

@@ -4,6 +4,8 @@ import styled from "styled-components";
 import data from "../data/sideMenuCard.json";
 import LogoBox from "./common/LogoBox";
 import interestListData from "../data/interestList.json";
+import SmallCard from "./common/SmallCard";
+import CloseButton from "./common/CloseButton";
 
 const Overlay = styled.div`
   width: 100%;
@@ -53,18 +55,6 @@ const MenuTop = styled.div`
 
 const MenuTitle = styled.div``;
 
-const MenuCloseBtn = styled.div`
-  width: 60px;
-  height: 60px;
-  border: 1px solid black;
-  border-radius: 50%;
-  cursor: pointer;
-  background-image: url("https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/close_menu_btn.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-`;
-
 const MenuContentArea = styled.div`
   width: 100%;
   height: auto;
@@ -79,58 +69,6 @@ const Title = styled.div`
   font-size: 16px;
   font-weight: 200;
   margin-bottom: 30px;
-`;
-
-const ConsultCardBox = styled.div`
-  display: grid;
-  grid-template-columns: 250px 250px;
-  gap: 50px;
-`;
-
-const ConsultCard = styled.div`
-  height: 320px;
-  position: relative;
-`;
-
-const CardBg = styled.div`
-  width: 230px;
-  height: 300px;
-  position: absolute;
-  border: 1px solid black;
-  left: 0;
-  bottom: 0;
-`;
-
-const CardContent = styled.div`
-  width: 230px;
-  height: 300px;
-  position: absolute;
-  border: 1px solid black;
-  top: 0;
-  right: 0;
-  background-color: white;
-  overflow: hidden;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  span {
-    font-size: 22px;
-    font-weight: 400;
-  }
-  transition: all 0.3s ease-in;
-  &:hover {
-    transform: translate(-8px, 8px);
-  }
-`;
-
-const CardIcon = styled.div`
-  width: 60px;
-  height: 60px;
-  border: 1px solid black;
-  border-radius: 30px;
 `;
 
 const RespBox = styled.div`
@@ -225,12 +163,12 @@ const MenuFooter = styled.div`
   font-size: 12px;
 `;
 
-export default function SideMenu({ menuOnOff, handleMeneOff }) {
+export default function SideMenu({ menuOnOff, handleMenuOff }) {
   return (
     <>
       {menuOnOff && (
         <Overlay>
-          <BlankArea onClick={handleMeneOff} />
+          <BlankArea onClick={handleMenuOff} />
           <MenuContainer>
             <MenuTop>
               <MenuTitle>
@@ -239,24 +177,16 @@ export default function SideMenu({ menuOnOff, handleMeneOff }) {
                 <br />
                 adicional.
               </MenuTitle>
-              <MenuCloseBtn onClick={handleMeneOff} />
+              <CloseButton
+                bgColor="white"
+                imageUrl="https://guiacirugiacardiaca.com/wp-content/themes/gcc/assets/img/close_menu_btn.svg"
+                eventHandler={handleMenuOff}
+              />
             </MenuTop>
             <MenuContentArea>
               <ConsultBox>
                 <Title>ÚLTIMAS TARJETAS CONSULTADAS</Title>
-                <ConsultCardBox>
-                  {data.ressult.map((v, i) => (
-                    <ConsultCard key={i}>
-                      <CardBg style={{ backgroundColor: v.color }} />
-                      <CardContent>
-                        <span>{v.title}</span>
-                        <CardIcon
-                          style={{ backgroundImage: `url(${v.logoUrl})` }}
-                        />
-                      </CardContent>
-                    </ConsultCard>
-                  ))}
-                </ConsultCardBox>
+                <SmallCard ressult={data.ressult} />
               </ConsultBox>
               <RespBox>
                 <Title>LAS TARJETAS MÁS BUSCADAS</Title>
