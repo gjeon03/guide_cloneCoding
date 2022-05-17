@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { memo, useCallback, useEffect, useRef, useState } from "react";
 import data from "../../data/cardInfo.json";
 import styled, { keyframes } from "styled-components";
 import { useViewportScroll } from "framer-motion";
@@ -19,25 +19,7 @@ const CardAnimation = keyframes`
 	}
 `;
 
-const CardBox = styled.div.attrs((props) => {
-  let str = `top: ${150 * props.$info.$idx}px;`;
-  const styleObj = { top: 150 * props.$info.$idx };
-  if (props.$info.$idx !== 6) {
-    str += `left: ${props.$info.$size * props.$info.$idx}px;`;
-    styleObj.left = props.$info.$size * props.$info.$idx;
-  } else {
-    str += `right: 0px;`;
-    styleObj.right = 0;
-  }
-  if (props.$info.$hover === props.$info.$idx) {
-    str += `z-index: 10;`;
-    styleObj.zIndex = 10;
-  } else {
-    str += `z-index: ${props.$info.$idx};`;
-    styleObj.zIndex = props.$info.$idx;
-  }
-  return { style: styleObj };
-})`
+const CardBox = styled.div`
   width: 570px;
   height: 420px;
   position: absolute;
@@ -125,15 +107,38 @@ const CardImage = styled.div`
   background-image: url(${(props) => props.$url});
 `;
 
-function Card() {
+const ListItem = memo(({ name, color, phrase, index }) => {
+  console.log("Rendered");
+
+  return <CardBox>hi</CardBox>;
+});
+
+export default function Card() {
   const firstCardRef = useRef(null);
   const lastCardRef = useRef(null);
   const [cardPos, setCardPos] = useState(null);
   const [hoverIndex, setHoverIndex] = useState(null);
+  const [cardStyle, setCardStyle] = useState({});
   const handleResize = useCallback(() => {
-    const firstPosX = firstCardRef.current.getBoundingClientRect().x;
-    const lastPosX = lastCardRef.current.getBoundingClientRect().x;
-    setCardPos((lastPosX - firstPosX) / 6);
+    // const firstPosX = firstCardRef.current.getBoundingClientRect().x;
+    // const lastPosX = lastCardRef.current.getBoundingClientRect().x;
+    // setCardPos((lastPosX - firstPosX) / 6);
+    /*
+	${(props) => {
+    let str = `top: ${150 * props.$info.$idx}px;`;
+    if (props.$info.$idx !== 6) {
+      str += `left: ${props.$info.$size * props.$info.$idx}px;`;
+    } else {
+      str += `right: 0px;`;
+    }
+    if (props.$info.$hover === props.$info.$idx) {
+      str += `z-index: 10;`;
+    } else {
+      str += `z-index: ${props.$info.$idx};`;
+    }
+    return str;
+  }}
+	 */
   }, []);
   const handleMouseOver = useCallback((index) => {
     setHoverIndex(index);
@@ -148,44 +153,17 @@ function Card() {
   return (
     <Area>
       {data.result.map((v, i) => {
-        let refValue = null;
-        let urlValue = "colorUrl";
-        let colorValue = v.color;
-        let hoverValue = false;
-        if (i === 6) {
-          refValue = lastCardRef;
-        } else {
-          if (i === 0) {
-            refValue = firstCardRef;
-          }
-        }
-        if (hoverIndex !== null && hoverIndex !== i) {
-          urlValue = "blackUrl";
-          colorValue = "#edece7";
-          hoverValue = true;
-        }
+        console.log("hello");
         return (
-          <CardBox
+          <ListItem
             key={i}
-            $info={{ $size: cardPos, $idx: i, $hover: hoverIndex }}
-            ref={refValue}
-            onMouseOver={() => handleMouseOver(i)}
-            onMouseOut={handleMouseOut}
-          >
-            <ColorBox $color={colorValue} />
-            <CardContent $hover={hoverValue}>
-              <CardName>{v.name}</CardName>
-              <CardNum $color={colorValue}>
-                <span>{i + 1}</span>
-              </CardNum>
-              <CardPhrase>{v.phrase}</CardPhrase>
-              <CardImage $url={v[urlValue]} />
-            </CardContent>
-          </CardBox>
+            name={v.name}
+            color={v.color}
+            phrase={v.phrase}
+            index={i}
+          ></ListItem>
         );
       })}
     </Area>
   );
 }
-
-export default React.memo(Card);

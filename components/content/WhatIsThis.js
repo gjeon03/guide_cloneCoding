@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import styled from "styled-components";
 import Card from "../common/Card";
+import BigCard from "../common/BigCard";
 import { bounce } from "../common/styles/bounce";
 
 const Area = styled.section`
@@ -78,9 +79,7 @@ export default function WhatIsThis() {
   return (
     <Area>
       <DescriptionArea>
-        <DescriptionBox
-          style={{ transform: `translate3d(0, ${scrollPos}px, 0)` }}
-        >
+        <DescriptionBox style={{ transform: `translate(0, ${scrollPos}px)` }}>
           <Title>¿QUÉ ES ESTO?</Title>
           <DescriptionText>
             Si estás leyendo esto, es porque pronto te operarán —a ti o a
